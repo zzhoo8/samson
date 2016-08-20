@@ -1,0 +1,17 @@
+# 参考网址 https://docs.python.org/2/distutils/sourcedist.html#the-manifest-in-template
+
+# 打包时包括以下文件
+include LICENSE
+
+# 打包时包括以下批量文件
+recursive-include tests *
+recursive-include docs *.rst conf.py Makefile make.bat
+
+# 打包时排除以下批量文件
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+# 打包时排除以下目录
+prune tests
+prune venv
+prune node_modules
