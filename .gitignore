@@ -1,3 +1,6 @@
 *.pyc
 
+dist
+samson.egg-info
 venv
+
