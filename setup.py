@@ -7,7 +7,7 @@ except ImportError:
     from distutils.core import setup
 
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
@@ -25,7 +25,7 @@ setup(
     name='samson',
     version='0.1.0',
     description="",
-    long_description=readme + '\n\n' + history,
+    long_description=readme + '\n\n' + history if history else "",
     author="zzhoo8",
     author_email='zzhoo8@qq.com',
     url='https://bitbucket.org/zzhoo8/samson',
