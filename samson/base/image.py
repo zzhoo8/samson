@@ -5,6 +5,7 @@
 """
 
 from PIL import Image, ImageDraw
+from PIL import ImageEnhance
 from PIL.ExifTags import TAGS
 
 
@@ -58,6 +59,7 @@ class ImageItem(object):
         thumb = Image.new("RGBA", (xx, yy), (238, 238, 238))
 
         # 拼接,取边框大小
+        # thumb.paste(self.image, box=(40, 40))
         thumb.paste(self.image, box=(40, 40))
 
         # 写入Exif信息
@@ -110,9 +112,21 @@ class ImageItem(object):
             exif_info = "@%s  %s  F%s %s ISO%s   photo by zzhoo8" % (_datetime, _model, _fnumber, _exposuretime, _iso)
             draw = ImageDraw.Draw(thumb)
             # draw.text(xy=(40, yy-30), text=exif_info, fill=(255, 255, 255), font=font)
-            draw.text(xy=(40, yy - 30), text=exif_info, fill=(68, 68, 68), font=font)
+            # draw.text(xy=(40, yy - 30), text=exif_info, fill=(68, 68, 68), font=font)
+            draw.text(xy=(40, yy - 30), text=exif_info, fill=(0, 0, 0), font=font)
         try:
-            out = out if out else "/Users/zzhoo8/out.jpg"
+            # 图片增强
+            # raw = thumb.copy()
+            enhance = ImageEnhance.Contrast(thumb)
+            thumb = enhance.enhance(factor=samson.config.get('CONTRAST', 1.0))
+            # enhance = ImageEnhance.Brightness(thumb)
+            # thumb = enhance.enhance(factor=1.1)
+            enhance = ImageEnhance.Sharpness(thumb)
+            thumb = enhance.enhance(factor=samson.config.get('SHARPNESS', 1.0))
+
+            out = out if out else "out.jpg"
+            from samson import logger
+            logger.info("thumb.save(%s, format='JPEG')", out)
             thumb.save(out, format='JPEG')
         except IOError, e:
             print e.message

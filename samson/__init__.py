@@ -39,15 +39,19 @@ class Samson(object):
         self.config = config.__dict__
 
     @log
-    def thumbnails_for_post(self):
+    def thumbnails_for_post(self, path=None):
         """
         一键生成带边框和exif信息的缩略图
         :return:
         """
-        _file = sys.argv[1] if len(sys.argv) > 1 else "/Users/zzhoo8/IMG_9588.JPG"
+        _file = sys.argv[1] if len(sys.argv) > 1 else path
         image = ImageItem(path=_file)
         # image.image.show()
-        image.thumbnails_for_post()
+        # print out
+        split = _file.rfind('/')
+        out = _file[:split + 1] + "samson_" + _file[split + 1:]
+        # print out
+        image.thumbnails_for_post(out=out)
 
 
 # 实例化
