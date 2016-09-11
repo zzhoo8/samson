@@ -12,6 +12,11 @@
 
 ## 功能
 
+### 2016-09-11
+
+* 优化数码照片边框，字体缩小到24px，颜色采用网页安全色灰白色系
+* 支持命令行输入一个图片文件路径`python main.py /tmp/xxx.jpg`，但是输出还是写死在代码里- -b，需要下次改好
+
 ### 2016-09-04
 
 * 实现数码照片按比例缩小，以高度800px为基准
@@ -29,12 +34,13 @@
 ```python
 # coding:utf-8
 
-
-from samson.base.image import ImageItem
+from config import Config
+from samson import samson
 
 
 if __name__ == '__main__':
-    image = ImageItem(path="/Users/zzhoo8/IMG_9584.JPG")
-    image.thumbnails_for_post()
+    samson.apply_config(config=Config)
+    samson.thumbnails_for_post()
+
 ```
 
