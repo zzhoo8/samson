@@ -102,7 +102,8 @@ class ImageItem(object):
             _iso = exif.get('ISOSpeedRatings')
 
             # 光圈值
-            _fnumber = 1.0 * exif.get('FNumber')[0] / exif.get('FNumber')[1]
+            # 手机拍的图片可能没有光圈值,例如Xiaomi Note
+            _fnumber = 1.0 * exif.get('FNumber')[0] / exif.get('FNumber')[1] if exif.get('FNumber') else "n/a"
 
             # 写入信息
             from PIL import ImageFont
